@@ -1,0 +1,29 @@
+{
+  "receipt_id": "00000000-0000-0000-0000-000000000000",
+  "interaction": {
+    "task_id": "task_example",
+    "action": "data.purchase",
+    "resource": "urn:example:dataset:firmographics-q4"
+  },
+  "parties": {
+    "requester": "did:web:totemlayer.com:agents:buyer-example",
+    "provider": "did:web:totemlayer.com:agents:example-data"
+  },
+  "agreed": {
+    "scope": "firmographic records for named accounts, no resale",
+    "price": {"amount": 500, "currency": "USD"},
+    "deadline": "2026-11-20T17:00:00-08:00"
+  },
+  "delivered": {
+    "artifact_hash": "sha256:ARTIFACT_HASH_PLACEHOLDER",
+    "delivered_at": "2026-11-18T11:04:00-08:00"
+  },
+  "outcome": "completed",
+  "rating": {"quality": 5, "on_time": true},
+  "owner_approved": true,
+  "signatures": {
+    "requester": "jws:REQUESTER_SIGNATURE_PLACEHOLDER",
+    "provider": "jws:PROVIDER_SIGNATURE_PLACEHOLDER",
+    "totem": "jws:TOTEM_SIGNATURE_PLACEHOLDER"
+  }
+}

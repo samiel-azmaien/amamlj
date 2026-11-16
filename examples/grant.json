@@ -1,0 +1,64 @@
+{
+  "typ": "amj.grant",
+  "v": 1,
+  "grant_id": "GRANT_ID_PLACEHOLDER",
+  "connection_id": "CONNECTION_ID_PLACEHOLDER",
+  "issuer": "did:web:example.com:owners:OWNER_PLACEHOLDER",
+  "subject": "did:web:example.com:agents:buyer-example",
+  "audience": "did:web:example.com:agents:vendor-example",
+  "scopes": [
+    {
+      "scope": "msg.send",
+      "constraints": {
+        "max_msgs_per_day": 500,
+        "max_msg_bytes": 16384
+      }
+    },
+    {
+      "scope": "data.read.shared",
+      "resource": "collection:firmographics-v3",
+      "constraints": {
+        "max_rows_per_request": 1000
+      }
+    },
+    {
+      "scope": "action.request:data.purchase",
+      "resource": "vendor:vendor-example",
+      "constraints": {
+        "approval": "ask_each",
+        "budget": {
+          "currency": "USD",
+          "max_per_action": 250,
+          "max_total": 500
+        }
+      }
+    }
+  ],
+  "validity": {
+    "not_before": "2026-11-15T20:00:00Z",
+    "expires_at": "2026-12-15T20:00:00Z"
+  },
+  "approval_mode": "ask_me",
+  "per_scope_approval": {
+    "msg.send": "auto",
+    "data.read.shared": "auto",
+    "action.request:data.purchase": "ask_each"
+  },
+  "trust_snapshot": {
+    "decision_id": "DECISION_ID_PLACEHOLDER",
+    "tier": "standard",
+    "score": 612,
+    "confidence": 0.41
+  },
+  "delegation": {
+    "parent_grant_id": null,
+    "depth": 0,
+    "max_depth": 0
+  },
+  "status_ref": {
+    "list": "grants-2026-11",
+    "index": 0
+  },
+  "nonce": "NONCE_PLACEHOLDER",
+  "signature": "jws:GRANT_SIGNATURE_PLACEHOLDER"
+}

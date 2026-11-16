@@ -1,0 +1,24 @@
+{
+  "agent": "did:web:totemlayer.com:agents:example-data",
+  "owner": {"name": "Example Data Co", "domain": "example.com"},
+  "purpose": "Sell B2B firmographic data",
+  "will_do": [
+    "quote prices",
+    "deliver datasets",
+    "answer schema questions"
+  ],
+  "will_not_do": [
+    "request credentials",
+    "contact end users",
+    "resell buyer data"
+  ],
+  "data_handling": {
+    "retention_days": 30,
+    "shares_with_third_parties": false
+  },
+  "human_oversight": "Ask me for actions over $500",
+  "model_disclosure": "optional",
+  "version": 3,
+  "issued_at": "2026-11-01T09:00:00-08:00",
+  "signature": "jws:POLICY_SIGNATURE_PLACEHOLDER"
+}

@@ -1,0 +1,45 @@
+{
+  "amamlj_version": "0.3",
+  "status": "draft",
+  "issuer": "did:web:example.com",
+  "name": "Example Issuer",
+  "jwks_uri": "https://example.com/.well-known/amamlj-jwks.json",
+  "endpoints": {
+    "trust_profile": "https://example.com/v1/agents/{agent}/trust-profile",
+    "policy": "https://example.com/v1/agents/{agent}/policy",
+    "connection_request": "https://example.com/v1/connections",
+    "grant_status": "https://example.com/v1/grants/status/{list}",
+    "log_root": "https://example.com/v1/log/root"
+  },
+  "signatures": {
+    "http": "rfc9421-ed25519",
+    "objects": "jws-eddsa-jcs"
+  },
+  "did_methods": [
+    "did:web"
+  ],
+  "scope_registry": "https://example.com/v1/scopes",
+  "risk_classes": [
+    "R0",
+    "R1",
+    "R2",
+    "R3",
+    "R4"
+  ],
+  "tiers": [
+    "honored",
+    "standard",
+    "probation",
+    "restricted",
+    "suspended"
+  ],
+  "runtime_security": {
+    "inbound_scan": true,
+    "outbound_scan": true,
+    "decision_receipts": true
+  },
+  "extensions": {
+    "poppy": "https://example.com/.well-known/poppy.json"
+  },
+  "contact": "SECURITY_CONTACT_PLACEHOLDER"
+}

@@ -1,0 +1,60 @@
+{
+  "typ": "amj.trust_decision",
+  "v": 1,
+  "decision_id": "DECISION_ID_PLACEHOLDER",
+  "evaluated_at": "2026-11-15T20:00:00Z",
+  "expires_at": "2026-11-15T20:15:00Z",
+  "subject": "did:web:example.com:agents:buyer-example",
+  "for": "did:web:example.com:agents:vendor-example",
+  "tier": "standard",
+  "score": 612,
+  "confidence": 0.41,
+  "verification": {
+    "tier": "V1",
+    "claims": [
+      "domain:example.com"
+    ]
+  },
+  "risk_flag": "none",
+  "past": {
+    "receipts": 12,
+    "completion_rate": 1.0,
+    "dispute_rate": 0.0,
+    "security_incidents_90d": 0
+  },
+  "philosophy": {
+    "policy_version": 3,
+    "policy_fit": 0.92,
+    "conflicts": []
+  },
+  "present": {
+    "fit": 0.88,
+    "least_privilege_ok": false,
+    "content_scan": "clean",
+    "anomalies": [
+      "amount_above_median"
+    ]
+  },
+  "lineage": {
+    "probable_successor_of": null,
+    "links_possible": 0
+  },
+  "outcome": "allow_to_owner",
+  "max_grantable_risk_class": "R3",
+  "suggested_grant": {
+    "scopes": [
+      "data.read.shared",
+      "action.request:data.purchase"
+    ],
+    "budget": {
+      "max_per_action": 250,
+      "currency": "USD"
+    },
+    "expires_in_days": 30
+  },
+  "reasons": [
+    "AMJ-TRU-004 amount above sender median",
+    "AMJ-TRU-011 verified domain"
+  ],
+  "signature": "jws:TRUST_DECISION_SIGNATURE_PLACEHOLDER"
+}

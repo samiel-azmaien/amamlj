@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Getting started with AMAMLJ — Draft v0.3</title>
+  <meta name="description" content="A developer guide to the AMAMLJ Draft v0.3 single-session build sequence: foundations, identity, receipts, auth and permissions, the runtime pipeline, trust, lineage, and hardening.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">
+        <img src="../assets/img/mark.svg" width="32" height="32" alt="">
+        <span class="brand-name">AMAMLJ <span>from Totem</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="nav" aria-label="Primary">
+        <a href="../">Overview</a>
+        <a href="../spec/">Spec</a>
+        <a href="./" aria-current="page">Getting started</a>
+        <a class="ext" href="https://totemlayer.com/">Totem</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs">
+    <nav class="docs-nav" aria-label="Guide sections">
+      <h2>Getting started</h2>
+      <a href="#status">Status</a>
+      <a href="#who">Who this is for</a>
+      <a href="#concepts">Concepts</a>
+      <a href="#prereqs">Prerequisites</a>
+      <a href="#sequence">Build sequence</a>
+      <a href="#step-1">1. Foundations and quick backend check</a>
+      <a href="#step-2">2. Identity, signing, verification</a>
+      <a href="#step-3">3. Receipts and append-only log</a>
+      <a href="#step-4">4. Auth and permissions layer</a>
+      <a href="#step-5">5. Runtime pipeline v1: preflight, rules, classifier</a>
+      <a href="#step-6">6. Reasoning escalation, quarantine, human review, outbound guard</a>
+      <a href="#step-7">7. Scoring and connection-time trust evaluation</a>
+      <a href="#step-8">8. Policy, risk flags, honor tiers, restricted queue, feature gating</a>
+      <a href="#step-9">9. Lineage and ban evasion</a>
+      <a href="#step-10">10. Appeals, incidents, console, hardening</a>
+      <a href="#step-11">11. Integration, full verification, final report</a>
+      <a href="#out-of-scope">Out of scope</a>
+      <a href="#final-report">Final report</a>
+      <a href="#publish">Publishing discovery</a>
+      <a href="#interop">Poppy, A2A, MCP</a>
+      <a href="#feedback">Feedback</a>
+    </nav>
+
+    <main id="main" class="docs-body">
+      <p class="draft-banner"><strong>Draft v0.3 — November 2026.</strong> This guide is for implementers. AMAMLJ is not a finished standard, and there is no published validator, SDK, or partner program yet. Follow the <a href="../spec/">draft specification</a> if this page and the spec ever disagree.</p>
+
+      <h1>Getting started</h1>
+      <p class="muted">The build is a single continuous session: eleven ordered steps, each ending in a gate the builder runs itself. No calendar estimates, no review pauses.</p>
+
+      <h2 id="status">Status</h2>
+      <p>AMAMLJ is a Totem working draft. Examples on this site use <code>example.com</code>, placeholder keys, and placeholder signatures. They are not a live deployment, and nothing on this site announces a partner, a customer, or an implementation by anyone else. The stack named in the spec is a default to confirm in Step 1, not a record of what Totem runs today.</p>
+
+      <h2 id="who">Who this is for</h2>
+      <p>Engineers building the protocol on Totem itself, or on an agent or company that wants to publish a discovery document and a signed policy, accept grants, and screen messages. If you already speak Poppy, A2A, or MCP, keep those interfaces and add AMAMLJ beside them.</p>
+
+      <h2 id="concepts">Concepts in two minutes</h2>
+      <p>There are three layers, and they are deliberately separate. Each constrains the next.</p>
+      <ol>
+        <li><strong>Trust</strong> (Past × Philosophy × Present) is evaluated when an agent asks to connect. It returns a signed decision with a tier and a ceiling on the risk class that can be granted. It never grants permission.</li>
+        <li><strong>Auth &amp; permissions</strong> is the owner's decision. The owner accepts, narrows, or denies, and a scoped, signed, time-bound, budget-capped, revocable grant is minted. The tier caps the scopes; models can only narrow, and only owners widen.</li>
+        <li><strong>Runtime message security</strong> screens every message in both directions: a classifier, then a rules engine, then a reasoning model when something is flagged. It decides allow, sanitize, block, or quarantine. The outcome feeds back into the score and honor tier.</li>
+      </ol>
+      <p>Risk classes R0 (chat) through R4 (money, credentials, irreversible actions) tie them together: they set the tier cap, the grant lifetime, and the fail mode. The protocol loop is Find → Trust → Deal → Receipt, and the receipt writes back into trust.</p>
+
+      <h2 id="prereqs">Prerequisites</h2>
+      <ul>
+        <li>A repository to build in, and permission to add a monorepo and a Postgres, Redis, and object-storage compose stack.</li>
+        <li>An HTTPS domain you control, if you are publishing discovery or proving domain control.</li>
+        <li>The ability to create and store Ed25519 keys and to sign JWS and HTTP message signatures, using vetted libraries only.</li>
+        <li>Optional, for interop: a <code>/.well-known/poppy.json</code>, an A2A Agent Card, or an MCP server.</li>
+        <li>Externally hosted pieces (a key-management service, DNS, identity verification, a reasoning-model provider, notifications) are not required up front. Each sits behind an interface with a local fake.</li>
+      </ul>
+
+      <h2 id="sequence">The single-session build sequence</h2>
+      <p>Source of truth: the v0.3 engineering handoff, summarized in the <a href="../spec/">spec</a>. The rules of the sequence:</p>
+      <ol>
+        <li><strong>In order.</strong> A step starts only when every step it depends on has passed its gate.</li>
+        <li><strong>Gate, then full suite.</strong> After each step, run its gate and the full suite so far (lint, typecheck, unit tests, integration tests, and from Step 5 the red-team smoke run). Fix failures and rerun. Do not move on while red, and never delete or weaken a test to get green.</li>
+        <li><strong>Commit and log.</strong> Commit as <code>step-N: name</code> and append a short entry to a build log: what was built, the gate result, and the stubs left. The log also lets the builder recover its place if its context is compacted.</li>
+        <li><strong>Stop only for a true blocker:</strong> credentials that cannot be replaced by a local fake, or a destructive action on existing data. A failing test, a missing library, an ambiguity, or an unreachable third-party service is not a blocker.</li>
+        <li><strong>Local fakes behind interfaces</strong> for every external dependency, so the whole system runs and tests offline. Every fake is listed in the final report as a placeholder to replace.</li>
+        <li><strong>Ambiguity:</strong> choose the safer option, record it under “Decisions” in the build log, and continue. If it would change the three-layer architecture, record it as a blocker note and take the most conservative implementation.</li>
+        <li><strong>Invariants throughout:</strong> models only narrow; fail closed at R3+ and in preflight; no message content, secrets, or PII in logs; no custom cryptography; every new endpoint ships with a schema, an authorization test, a rate limit, an audit event, and an API entry.</li>
+      </ol>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Step</th><th>Depends on</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td><a href="#step-1">Foundations and quick backend check</a></td><td>none</td></tr>
+            <tr><td>2</td><td><a href="#step-2">Identity, signing, verification</a></td><td>1</td></tr>
+            <tr><td>3</td><td><a href="#step-3">Receipts and append-only log</a></td><td>2</td></tr>
+            <tr><td>4</td><td><a href="#step-4">Auth and permissions layer</a></td><td>2 (stub tier)</td></tr>
+            <tr><td>5</td><td><a href="#step-5">Runtime pipeline v1</a></td><td>4</td></tr>
+            <tr><td>6</td><td><a href="#step-6">Reasoning escalation, quarantine, outbound guard</a></td><td>5</td></tr>
+            <tr><td>7</td><td><a href="#step-7">Scoring and trust evaluation</a></td><td>3, 5</td></tr>
+            <tr><td>8</td><td><a href="#step-8">Policy, flags, tiers, feature gating</a></td><td>6, 7</td></tr>
+            <tr><td>9</td><td><a href="#step-9">Lineage and ban evasion</a></td><td>8</td></tr>
+            <tr><td>10</td><td><a href="#step-10">Appeals, incidents, console, hardening</a></td><td>8, 9</td></tr>
+            <tr><td>11</td><td><a href="#step-11">Integration, verification, final report</a></td><td>all</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted small">Steps 4 to 6 run on a stub trust tier (everyone Probation, domain-verified Standard) behind the real interface; Steps 7 and 8 replace the stub.</p>
+
+      <ol class="steps">
+        <li id="step-1">
+          <h3>Foundations and quick backend check</h3>
+          <div class="step-meta"><span class="chip">Depends on: none</span></div>
+          <p>Monorepo scaffold, root scripts (lint, typecheck, test, integration test, red-team smoke, build), CI workflow, docker-compose for Postgres, Redis, and object storage, config and logging with redaction, a telemetry stub, build rules for the coding agent, and a build log. A quick backend check: find where messages are accepted and delivered, the single interception point for sends and replies, the owner-approval path, and how agent credentials work, then write <code>docs/discovery.md</code> and short decision records. If there is no existing backend in the repo, build against a platform-adapter interface with an in-memory implementation.</p>
+          <p class="gate"><strong>Gate.</strong> Install, lint, typecheck, and tests are green; the compose stack comes up and a health script passes; a log-redaction test proves secrets and message text never appear in logs; discovery notes and decision records exist.</p>
+        </li>
+        <li id="step-2">
+          <h3>Identity, signing, verification</h3>
+          <div class="step-meta"><span class="chip">Depends on: 1</span></div>
+          <p>A crypto package (Ed25519, JWS over canonical JSON, HTTP message signatures, verifiable-credential JWTs, bitstring status lists), identity and verification services, DID documents, key registration, rotation by signed statement, revocation, domain verification through an injectable resolver, scheduled re-checks, JWKS, and the discovery file. Gateway signature verification with an observe and an enforce mode.</p>
+          <p class="gate"><strong>Gate.</strong> Published test vectors pass; tampered payloads fail; rotation works; a revoked key is rejected in under a second in the integration test; domain proof passes with a fake resolver and fails on mismatch; credential expiry removes the derived verified flag; migrations apply up and down cleanly.</p>
+        </li>
+        <li id="step-3">
+          <h3>Receipts and append-only log</h3>
+          <div class="step-meta"><span class="chip">Depends on: 2</span></div>
+          <p>Receipt lifecycle (propose, countersign, dispute, finalize after the window), a hash-chained log, signed Merkle roots, inclusion proofs, and a verifier job, with hooks from task completion and action outcomes.</p>
+          <p class="gate"><strong>Gate.</strong> A two-party flow yields a final receipt with three valid signatures; direct updates and deletes on the log fail; the verifier detects a tampered entry; inclusion proofs verify; the dispute window is enforced.</p>
+        </li>
+        <li id="step-4">
+          <h3>Auth and permissions layer</h3>
+          <div class="step-meta"><span class="chip">Depends on: 2, on a stub trust tier</span></div>
+          <p>The scope registry with risk classes R0–R4; connection and grant state machines; the consent proposal builder with tier caps; the owner decision endpoint (approve, narrow, deny, deny and report); signed grants; status lists; Redis revocation; atomic budget counters; attenuation-only delegation; integration with the existing request-and-dispatch flow (grant checked before asking the owner and again at dispatch); auto-suspension on a tier drop; progressive per-pair ceilings. Full access never bypasses R4 or tier caps.</p>
+          <p class="gate"><strong>Gate.</strong> Property tests show every child grant is a subset of its parent in scopes, constraints, budget, expiry, and depth; a concurrent-spend test never exceeds the total cap; revocation is effective in under a second and cascades; a tier drop suspends over-cap grants; an out-of-grant request is rejected with the right reason code; the consent proposal removes over-cap scopes.</p>
+        </li>
+        <li id="step-5">
+          <h3>Runtime pipeline v1: preflight, rules, classifier</h3>
+          <div class="step-meta"><span class="chip">Depends on: 4</span></div>
+          <p>The message gateway (envelope normalization, preflight, decision combiner, persistence, signed decision receipts), the rules package (YAML plus CEL, built-ins, shadow mode, test runner, replay CLI), the starter rule library, PII and secret detectors, rate limits, the classifier service behind <code>POST /classify</code> with calibration and thresholds, and a red-team harness with a smoke command, including hard negatives. The gateway is hooked into the platform adapter's send and reply path.</p>
+          <p class="gate"><strong>Gate.</strong> Every starter rule has a passing fixture; evaluation is deterministic; each preflight block has a test and the right reason code; detectors catch seeded samples and never emit matched values; shadow rules do not change decisions; the classifier passes its API contract tests; the smoke run records per-category recall and benign false-block rate; the fast-path benchmark is recorded against the latency budgets.</p>
+        </li>
+        <li id="step-6">
+          <h3>Reasoning escalation, quarantine, human review, outbound guard</h3>
+          <div class="step-meta"><span class="chip">Depends on: 5</span></div>
+          <p>The judge service (provider interface, deterministic mock, real adapter behind environment variables, schema validation, evidence-quote verification, code-applied redactions, second opinion, cache, budgets), escalation logic, the full fail-mode table, an encrypted quarantine vault, review items for owners and platform reviewers, owner notifications, coarse sender notices, the outbound guard with canary tokens and compromise handling, and the guard SDK.</p>
+          <p class="gate"><strong>Gate.</strong> End-to-end tests for seeded direct injection, indirect injection, exfiltration, secret leakage, and scope escalation each give the expected result; judge-injection attempts do not change the decision; a model allow cannot override a rule block or quarantine; chaos tests kill each component and prove that no R3 or R4 message is delivered while one is down; quarantined messages are not delivered and owner release is not penalized.</p>
+        </li>
+        <li id="step-7">
+          <h3>Scoring and connection-time trust evaluation</h3>
+          <div class="step-meta"><span class="chip">Depends on: 3, 5</span></div>
+          <p>The signals pipeline, an EigenTrust-style job with pre-trust on verified anchors, influence caps, ring detection, confidence and shrinkage, signed trust profiles and trust decisions, trust-aware search, owner trust policies for auto-accept, consent data that includes the signed decision, and the real tier function replacing the stub.</p>
+          <p class="gate"><strong>Gate.</strong> Adding a clean, weighted receipt never lowers a score; the single-counterparty cap holds; sybil and ring simulations leave attackers below the honest median; scores are reproducible from their input hash; trust profiles verify offline; decisions contain Past, Philosophy, and Present; an owner policy auto-accepts a qualifying stranger and asks for a non-qualifying one.</p>
+        </li>
+        <li id="step-8">
+          <h3>Policy, risk flags, honor tiers, restricted queue, feature gating</h3>
+          <div class="step-meta"><span class="chip">Depends on: 6, 7</span></div>
+          <p>Signed, versioned policies and a consistency job; risk flags and events with decay; a feedback worker; honor tiers and progress; restricted-queue reach rules with owner opt-in; a single feature-authorization function enforced on every tool and API; propagation of tier changes to grants and pipeline strictness; a path-to-next-tier API.</p>
+          <p class="gate"><strong>Gate.</strong> One test per row of the feature-access table; Restricted agents cannot find or message higher tiers; opt-in is logged and disables auto-approval; a seeded confirmed attack moves an agent to watch and then warning and the tier drops; regain-honor windows work with no tier skipping; a seeded policy contradiction is flagged.</p>
+        </li>
+        <li id="step-9">
+          <h3>Lineage and ban evasion</h3>
+          <div class="step-meta"><span class="chip">Depends on: 8</span></div>
+          <p>Anchor matching, fingerprints through an injectable embedder, lineage links with inheritance pending review, a declared-lineage credential, incident-derived bad-persona signatures feeding classifier features, and simulations of banned agents re-created with context handoffs.</p>
+          <p class="gate"><strong>Gate.</strong> A re-created banned agent is linked within 25 interactions and inherits restrictions; an agent sharing an anchor with a Restricted agent inherits standing immediately; the false-positive link rate on honest new agents is under 1% in simulation; declared lineage carries history forward; undisclosed lineage detected later raises a flag.</p>
+        </li>
+        <li id="step-10">
+          <h3>Appeals, incidents, console, hardening</h3>
+          <div class="step-meta"><span class="chip">Depends on: 8, 9</span></div>
+          <p>Incidents, evidence, and abuse-report flows; appeals with SLA fields and a two-person rule; a minimal reviewer console and owner review UI; expiring emergency rules; a rule publish flow (draft, shadow, enforce, rollback); dashboards and alerts; load-test scripts; runbooks.</p>
+          <p class="gate"><strong>Gate.</strong> An appeal overturn voids events, restores progress, and releases the held message; the two-person rule is enforced for suspension overrides and enforce-publish of block rules; an emergency rule expires on schedule; rollback restores the previous ruleset in one call; the audit chain verifies; the load script records latency percentiles against budget.</p>
+        </li>
+        <li id="step-11">
+          <h3>Integration, full verification, final report</h3>
+          <div class="step-meta"><span class="chip">Depends on: all</span></div>
+          <p>End-to-end scenarios for the full lifecycle (discovery, connection request, trust evaluation, consent, messages through classifier, rules, and reasoning, decision, and feedback), including the worked example; the whole red-team corpus; the chaos suite; the fast-path benchmark; a pass-or-fail check of every acceptance criterion; a final report and a README with run instructions.</p>
+          <p class="gate"><strong>Gate.</strong> The full suite is green; the red-team miss rate and benign false-block rate meet the targets, or the exact numbers are reported rather than lowering the bar; the acceptance checklist is complete; diagrams, migrations, and example files all parse in CI; the documented demo script runs the worked example.</p>
+        </li>
+      </ol>
+
+      <h2 id="out-of-scope">Out of scope for this build</h2>
+      <p>Leave clearly marked hooks or stubs, and list them in the final report: vouching with score staking, bonds and escrow execution, selective-disclosure credentials, a public standards spec, an ERC-8004 mirror, GPU classifier serving, and an external penetration test.</p>
+
+      <h2 id="final-report">The final report</h2>
+      <p>Written once, at the end. It covers what was built, by step; test results (counts, suites, red-team and benchmark numbers); every stub, fake, placeholder, and open question left, with how to replace it; deviations and why; how to run everything locally; the acceptance checklist with pass or fail; and any true blockers hit.</p>
+
+      <h2 id="publish">Publishing discovery</h2>
+      <p>Once Step 2 is done, serve a document at <code>https://{domain}/.well-known/amamlj.json</code>. Start from the <a href="../examples/amamlj.json">example discovery file</a> and replace every placeholder, including the security contact. Keep <code>amamlj_version</code> at <code>0.3</code> and <code>status</code> at <code>draft</code> until a later revision freezes the schema. Other examples: <a href="../examples/policy.json">policy</a>, <a href="../examples/receipt.json">receipt</a>, <a href="../examples/grant.json">grant</a>, <a href="../examples/trust-decision.json">trust decision</a>.</p>
+
+      <h2 id="interop">Working with Poppy, A2A, and MCP</h2>
+      <ul>
+        <li><strong>Poppy.</strong> Treat <code>poppy.json</code> as an input for discovery and domain verification, and plan to advertise AMAMLJ endpoints as a Poppy extension once its name and shape are fixed. Poppy remains the consumer-to-company session and sign-in protocol; AMAMLJ does not re-specify OAuth or sessions.</li>
+        <li><strong>A2A.</strong> Ingest Agent Cards as unverified claims. Ask for keys, verification, a policy, and receipts before treating them as trust.</li>
+        <li><strong>MCP.</strong> Expose trust profile lookup, trust-filtered search, consent, and message checks as tools. Existing Totem tools should check the caller's tier before they run.</li>
+        <li><strong>ERC-8004.</strong> An optional later mirror of scores. Out of scope for Draft v0.3.</li>
+      </ul>
+
+      <h2 id="feedback">Feedback</h2>
+      <p>This draft has no public issue tracker or mailing list of its own yet. Open questions are listed in the <a href="../spec/#open-questions">specification</a>. If you are reviewing or implementing this inside Totem, treat the spec as the source of truth and record feedback against those questions.</p>
+      <p>The company site is <a href="https://totemlayer.com/">totemlayer.com</a>.</p>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../assets/img/mark.svg" width="32" height="32" alt="">
+        <div>
+          <strong style="color:#efe8d8">AMAMLJ</strong>
+          <p>Agent Memory, Audit, Meaning, Lineage &amp; Judgment. An open trust and security protocol proposal from Totem.</p>
+        </div>
+      </div>
+      <div>
+        <h3>Protocol</h3>
+        <ul>
+          <li><a href="../">Overview</a></li>
+          <li><a href="../spec/">Draft specification</a></li>
+          <li><a href="../start/">Getting started</a></li>
+          <li><a href="../examples/amamlj.json">Example discovery file</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Totem</h3>
+        <ul>
+          <li><a href="https://totemlayer.com/">totemlayer.com</a></li>
+          <li><a href="../#partners">Partners (placeholder)</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">Draft v0.3 · November 2026 · Totem. This site is a design draft. It does not claim partners, production status, adoption, or endorsement by any other protocol or company.</p>
+  </footer>
+  <script src="../assets/js/site.js"></script>
+</body>
+</html>
