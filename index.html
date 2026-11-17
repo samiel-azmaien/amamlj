@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AMAMLJ — Trust, permissions, and message security for agents</title>
+  <title>AMAMLJ (Agent Memory, Audit, Meaning, Lineage &amp; Judgment) — Trust, permissions, and message security for agents</title>
   <meta name="description" content="AMAMLJ (Agent Memory, Audit, Meaning, Lineage &amp; Judgment) is Totem's draft open protocol for agent-to-agent security: a trust layer, an auth and permissions layer, and a runtime message security pipeline.">
+  <meta property="og:title" content="AMAMLJ (Agent Memory, Audit, Meaning, Lineage &amp; Judgment) — Trust, permissions, and message security for agents">
+  <meta name="theme-color" content="#08090b">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
@@ -17,8 +19,8 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="index.html">
-        <img src="assets/img/mark.svg" width="32" height="32" alt="">
-        <span class="brand-name">AMAMLJ <span>from Totem</span></span>
+        <img src="assets/img/mark.svg" width="24" height="24" alt="Totem">
+        <span class="brand-name">AMAMLJ <span><b>A</b>gent <b>M</b>emory, <b>A</b>udit, <b>M</b>eaning, <b>L</b>ineage &amp; <b>J</b>udgment</span></span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="nav" aria-label="Primary">
@@ -27,22 +29,40 @@
         <a href="start/">Getting started</a>
         <a class="ext" href="https://totemlayer.com/">Totem</a>
       </nav>
+      <a class="header-cta" href="spec/">Read the spec</a>
     </div>
   </header>
 
   <main id="main">
     <section class="hero">
+      <div class="hero-grid">
+      <div class="hero-copy">
       <div class="hero-kicker">
         <span class="draft-chip">Draft v0.3</span>
         <span class="muted small">A working draft · November 2026 · Not a finished standard</span>
       </div>
-      <h1>Should this agent be trusted? What may it do? Is this message safe?</h1>
-      <p class="lede">AMAMLJ — Agent Memory, Audit, Meaning, Lineage &amp; Judgment — is a draft open protocol from <a href="https://totemlayer.com/">Totem</a> for agent-to-agent security. It answers three questions, in order, with three separate layers: <strong>trust</strong>, <strong>auth &amp; permissions</strong>, and <strong>runtime message security</strong>.</p>
+      <h1 class="hero-title"><span class="wordmark">AMAMLJ</span><span class="expansion"><b>A</b>gent <b>M</b>emory, <b>A</b>udit, <b>M</b>eaning, <b>L</b>ineage &amp; <b>J</b>udgment</span></h1>
+      <p class="hero-q">Should this agent be trusted? What may it do? Is this message safe?</p>
+      <p class="lede">AMAMLJ is a draft open protocol from <a href="https://totemlayer.com/">Totem</a> for agent-to-agent security. It answers three questions, in order, with three separate layers: <strong>trust</strong>, <strong>auth &amp; permissions</strong>, and <strong>runtime message security</strong>.</p>
       <p class="sublede">The layers are deliberately separate so each can be audited and changed on its own. Trust caps what can be granted. The grant bounds what a message may ask for. The pipeline enforces both on every message. AMAMLJ is designed to plug into Poppy, A2A, and MCP, not replace them.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#how-it-works">See the three layers</a>
         <a class="btn btn-ghost" href="spec/">Read the draft spec</a>
         <a class="btn btn-ghost" href="start/">Build sequence</a>
+      </div>
+      </div>
+      <aside class="hero-window" aria-label="What each letter of AMAMLJ stands for">
+        <div class="hw-bar"><span class="hw-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>amamlj.json · what each letter checks</span></div>
+        <ul class="hw-rows">
+          <li><span class="hw-l">A</span><span class="hw-w">Agent</span><span class="hw-d">The subject: a keyed, verifiable agent identity</span></li>
+          <li><span class="hw-l">M</span><span class="hw-w">Memory</span><span class="hw-d">Two-sided signed receipts, append-only</span><span class="hw-tag t1">Past</span></li>
+          <li><span class="hw-l">A</span><span class="hw-w">Audit</span><span class="hw-d">Credit-score-style trust score + risk flag</span><span class="hw-tag t1">Past</span></li>
+          <li><span class="hw-l">M</span><span class="hw-w">Meaning</span><span class="hw-d">Signed policy: what it will and won't do</span><span class="hw-tag t2">Philosophy</span></li>
+          <li><span class="hw-l">L</span><span class="hw-w">Lineage</span><span class="hw-d">Keys, domain proof, ban-evasion anchors</span><span class="hw-tag t1">Past</span></li>
+          <li><span class="hw-l">J</span><span class="hw-w">Judgment</span><span class="hw-d">Live check on this request and every message</span><span class="hw-tag t3">Present</span></li>
+        </ul>
+        <div class="hw-foot"><span>Trust → Auth &amp; permissions → Runtime security</span><a href="spec/">Spec ↗</a></div>
+      </aside>
       </div>
       <ol class="hero-layers" aria-label="The three layers">
         <li class="hl hl-1"><span class="hl-n">Layer 1</span><strong>Trust</strong><span>Past × Philosophy × Present. Should I trust this agent at all?</span></li>
@@ -702,32 +722,32 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="assets/img/mark.svg" width="32" height="32" alt="">
-        <div>
-          <strong style="color:#efe8d8">AMAMLJ</strong>
-          <p>Agent Memory, Audit, Meaning, Lineage &amp; Judgment. An open trust and security protocol proposal from Totem.</p>
+    <div class="footer-sky">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a class="fb-lockup" href="./"><img src="assets/img/mark.svg" width="28" height="28" alt="">AMAMLJ</a>
+          <p><span class="acronym"><b>A</b>gent <b>M</b>emory, <b>A</b>udit, <b>M</b>eaning, <b>L</b>ineage &amp; <b>J</b>udgment</span>. An open trust and security protocol proposal from Totem.</p>
         </div>
+        <nav aria-label="Protocol">
+          <h3>Protocol</h3>
+          <ul>
+            <li><a href="./">Overview</a></li>
+            <li><a href="spec/">Draft specification</a></li>
+            <li><a href="start/">Getting started</a></li>
+            <li><a href="examples/amamlj.json">Example discovery file</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Totem">
+          <h3>Totem</h3>
+          <ul>
+            <li><a href="https://totemlayer.com/">totemlayer.com</a></li>
+            <li><a href="#partners">Partners (placeholder)</a></li>
+          </ul>
+        </nav>
       </div>
-      <div>
-        <h3>Protocol</h3>
-        <ul>
-          <li><a href="index.html">Overview</a></li>
-          <li><a href="spec/">Draft specification</a></li>
-          <li><a href="start/">Getting started</a></li>
-          <li><a href="examples/amamlj.json">Example discovery file</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Totem</h3>
-        <ul>
-          <li><a href="https://totemlayer.com/">totemlayer.com</a></li>
-          <li><a href="index.html#partners">Partners (placeholder)</a></li>
-        </ul>
-      </div>
+      <span class="footer-wordmark" aria-hidden="true">AMAMLJ</span>
     </div>
-    <p class="legal">Draft v0.3 · November 2026 · Totem. This site is a design draft. It does not claim partners, production status, adoption, or endorsement by any other protocol or company.</p>
+    <p class="legal"><span>© 2026 Totem · AMAMLJ (Agent Memory, Audit, Meaning, Lineage &amp; Judgment) · Draft v0.3 · November 2026</span><span>Design draft. No partners, production status, adoption, or endorsements are claimed.</span></p>
   </footer>
   <script src="assets/js/site.js"></script>
 </body>

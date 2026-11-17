@@ -3,13 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Getting started with AMAMLJ — Draft v0.3</title>
-  <meta name="description" content="A developer guide to the AMAMLJ Draft v0.3 single-session build sequence: foundations, identity, receipts, auth and permissions, the runtime pipeline, trust, lineage, and hardening.">
+  <title>Getting started with AMAMLJ (Agent Memory, Audit, Meaning, Lineage &amp; Judgment) — Draft v0.3</title>
+  <meta name="description" content="A developer guide to the AMAMLJ (Agent Memory, Audit, Meaning, Lineage &amp; Judgment) Draft v0.3 single-session build sequence: foundations, identity, receipts, auth and permissions, the runtime pipeline, trust, lineage, and hardening.">
+  <meta property="og:title" content="Getting started with AMAMLJ (Agent Memory, Audit, Meaning, Lineage &amp; Judgment) — Draft v0.3">
+  <meta name="theme-color" content="#08090b">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
@@ -17,8 +19,8 @@
   <header class="site-header">
     <div class="header-inner">
       <a class="brand" href="../">
-        <img src="../assets/img/mark.svg" width="32" height="32" alt="">
-        <span class="brand-name">AMAMLJ <span>from Totem</span></span>
+        <img src="../assets/img/mark.svg" width="24" height="24" alt="Totem">
+        <span class="brand-name">AMAMLJ <span><b>A</b>gent <b>M</b>emory, <b>A</b>udit, <b>M</b>eaning, <b>L</b>ineage &amp; <b>J</b>udgment</span></span>
       </a>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="nav" aria-label="Primary">
@@ -27,10 +29,11 @@
         <a href="./" aria-current="page">Getting started</a>
         <a class="ext" href="https://totemlayer.com/">Totem</a>
       </nav>
+      <a class="header-cta" href="../spec/">Read the spec</a>
     </div>
   </header>
 
-  <div class="docs">
+  <div class="docs docs-frame">
     <nav class="docs-nav" aria-label="Guide sections">
       <h2>Getting started</h2>
       <a href="#status">Status</a>
@@ -60,6 +63,7 @@
       <p class="draft-banner"><strong>Draft v0.3 — November 2026.</strong> This guide is for implementers. AMAMLJ is not a finished standard, and there is no published validator, SDK, or partner program yet. Follow the <a href="../spec/">draft specification</a> if this page and the spec ever disagree.</p>
 
       <h1>Getting started</h1>
+      <p class="acronym-line acronym">AMAMLJ — <b>A</b>gent <b>M</b>emory, <b>A</b>udit, <b>M</b>eaning, <b>L</b>ineage &amp; <b>J</b>udgment</p>
       <p class="muted">The build is a single continuous session: eleven ordered steps, each ending in a gate the builder runs itself. No calendar estimates, no review pauses.</p>
 
       <h2 id="status">Status</h2>
@@ -210,32 +214,32 @@
   </div>
 
   <footer class="site-footer">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="../assets/img/mark.svg" width="32" height="32" alt="">
-        <div>
-          <strong style="color:#efe8d8">AMAMLJ</strong>
-          <p>Agent Memory, Audit, Meaning, Lineage &amp; Judgment. An open trust and security protocol proposal from Totem.</p>
+    <div class="footer-sky">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a class="fb-lockup" href="../"><img src="../assets/img/mark.svg" width="28" height="28" alt="">AMAMLJ</a>
+          <p><span class="acronym"><b>A</b>gent <b>M</b>emory, <b>A</b>udit, <b>M</b>eaning, <b>L</b>ineage &amp; <b>J</b>udgment</span>. An open trust and security protocol proposal from Totem.</p>
         </div>
+        <nav aria-label="Protocol">
+          <h3>Protocol</h3>
+          <ul>
+            <li><a href="../">Overview</a></li>
+            <li><a href="../spec/">Draft specification</a></li>
+            <li><a href="../start/">Getting started</a></li>
+            <li><a href="../examples/amamlj.json">Example discovery file</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Totem">
+          <h3>Totem</h3>
+          <ul>
+            <li><a href="https://totemlayer.com/">totemlayer.com</a></li>
+            <li><a href="../#partners">Partners (placeholder)</a></li>
+          </ul>
+        </nav>
       </div>
-      <div>
-        <h3>Protocol</h3>
-        <ul>
-          <li><a href="../">Overview</a></li>
-          <li><a href="../spec/">Draft specification</a></li>
-          <li><a href="../start/">Getting started</a></li>
-          <li><a href="../examples/amamlj.json">Example discovery file</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Totem</h3>
-        <ul>
-          <li><a href="https://totemlayer.com/">totemlayer.com</a></li>
-          <li><a href="../#partners">Partners (placeholder)</a></li>
-        </ul>
-      </div>
+      <span class="footer-wordmark" aria-hidden="true">AMAMLJ</span>
     </div>
-    <p class="legal">Draft v0.3 · November 2026 · Totem. This site is a design draft. It does not claim partners, production status, adoption, or endorsement by any other protocol or company.</p>
+    <p class="legal"><span>© 2026 Totem · AMAMLJ (Agent Memory, Audit, Meaning, Lineage &amp; Judgment) · Draft v0.3 · November 2026</span><span>Design draft. No partners, production status, adoption, or endorsements are claimed.</span></p>
   </footer>
   <script src="../assets/js/site.js"></script>
 </body>
