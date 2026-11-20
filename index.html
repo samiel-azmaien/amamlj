@@ -12,7 +12,141 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=7">
+  <style>
+    /* Critical hero styles (inlined so a cached stylesheet cannot unstyle this block) */
+/* AMAMLJ overview hero — centered 2-col container above the docs grid */
+.amj-hero {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 24px 40px;
+}
+.amj-hero *,
+.amj-hero *::before,
+.amj-hero *::after { box-sizing: border-box; }
+.amj-hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px 48px;
+  align-items: center;
+}
+.amj-hero h1 {
+  margin: 0 0 20px;
+  color: #eef3fb;
+  font-family: Manrope, "Totem Manrope", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(42px, 4.4vw, 56px);
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.amj-hero-lede {
+  margin: 0 0 22px;
+  max-width: 36em;
+  color: #bec0c7;
+  font-size: 18px;
+  line-height: 1.7;
+}
+.amj-hero-acronym {
+  margin: 0 0 28px;
+  color: #eef3fb;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+}
+.amj-hero-acronym b {
+  color: #a9d3f5;
+  font-weight: 700;
+}
+.amj-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.docs-site .amj-hero a.amj-btn,
+.amj-hero a.amj-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+}
+.docs-site .amj-hero a.amj-btn-primary,
+.amj-hero a.amj-btn-primary {
+  border: 0;
+  background: #e0e0e0;
+  color: #171717;
+}
+.docs-site .amj-hero a.amj-btn-primary:hover,
+.amj-hero a.amj-btn-primary:hover {
+  background: #fff;
+  color: #111;
+}
+.docs-site .amj-hero a.amj-btn-secondary,
+.amj-hero a.amj-btn-secondary {
+  border: 1px solid #ffffff40;
+  background: transparent;
+  color: #eef3fb;
+}
+.docs-site .amj-hero a.amj-btn-secondary:hover,
+.amj-hero a.amj-btn-secondary:hover {
+  border-color: #ffffff70;
+  background: #ffffff08;
+}
+.amj-hero-card {
+  min-width: 0;
+  max-height: 380px;
+  border: 1px solid #ffffff22;
+  border-radius: 22px;
+  background: #111214;
+  box-shadow: 0 24px 60px #00000055;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.amj-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 380px;
+}
+.docs-article-header-compact {
+  padding-bottom: 18px;
+}
+.docs-article-header-compact .docs-eyebrow {
+  margin: 0 0 6px !important;
+}
+.docs-article-header-compact > p:last-child {
+  color: var(--docs-muted);
+  font-size: 14px;
+}
+@media (max-width: 800px) {
+  .amj-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .amj-hero h1 { font-size: clamp(34px, 8vw, 48px); }
+  .amj-hero-card { max-height: none; }
+  .amj-diagram { max-height: none; }
+}
+@media (max-width: 520px) {
+  .amj-hero { padding: 20px 20px 24px; }
+  .amj-hero h1 { font-size: 34px; letter-spacing: -0.03em; }
+  .amj-hero-lede { font-size: 16px; }
+  .amj-hero-acronym { font-size: 15px; margin-bottom: 22px; }
+}
+
+  </style>
 </head>
 <body>
 <div class="docs-site">
@@ -751,6 +885,6 @@ Totem</a>
     <aside class="docs-right-rail"><nav class="docs-outline" aria-label="On this page"><p>On this page</p></nav></aside>
   </div>
 </div>
-<script src="assets/js/site.js"></script>
+<script src="assets/js/site.js?v=7"></script>
 </body>
 </html>
