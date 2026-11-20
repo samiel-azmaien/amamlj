@@ -1512,3 +1512,119 @@ body { font-size: 15px; }
 @media (max-width: 1000px) {
   .docs-search-panel { width: min(420px, calc(100vw - 48px)); }
 }
+
+/* AMAMLJ overview hero — full width above the docs grid */
+.amj-hero {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 36px 40px 28px;
+}
+.amj-hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(280px, 0.98fr);
+  gap: 48px 56px;
+  align-items: center;
+}
+.amj-hero h1 {
+  margin: 0 0 20px;
+  color: var(--docs-fg);
+  font-size: clamp(42px, 4.4vw, 56px);
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.amj-hero-lede {
+  margin: 0 0 22px;
+  max-width: 36em;
+  color: var(--docs-body);
+  font-size: 18px;
+  line-height: 1.7;
+}
+.amj-hero-acronym {
+  margin: 0 0 28px;
+  color: var(--docs-fg);
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
+}
+.amj-hero-acronym b {
+  color: #a9d3f5;
+  font-weight: 700;
+}
+.amj-hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.amj-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .16s ease, border-color .16s ease, color .16s ease;
+}
+.amj-btn-primary {
+  background: #e0e0e0;
+  color: #171717;
+}
+.amj-btn-primary:hover {
+  background: #fff;
+  color: #111;
+}
+.amj-btn-secondary {
+  border: 1px solid #ffffff40;
+  background: transparent;
+  color: var(--docs-fg);
+}
+.amj-btn-secondary:hover {
+  border-color: #ffffff70;
+  background: #ffffff08;
+}
+.amj-hero-card {
+  min-width: 0;
+  border: 1px solid #ffffff22;
+  border-radius: 22px;
+  background: #111214;
+  box-shadow: 0 24px 60px #00000055;
+  overflow: hidden;
+}
+.amj-diagram {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: top;
+}
+.docs-article-header-compact {
+  padding-bottom: 18px;
+}
+.docs-article-header-compact .docs-eyebrow {
+  margin: 0 0 6px !important;
+}
+.docs-article-header-compact > p:last-child {
+  color: var(--docs-muted);
+  font-size: 14px;
+}
+@media (max-width: 1250px) {
+  .amj-hero { padding-inline: 32px; }
+}
+@media (max-width: 1000px) {
+  .amj-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .amj-hero h1 { font-size: clamp(36px, 8vw, 48px); }
+  .amj-hero-card { max-width: none; }
+}
+@media (max-width: 520px) {
+  .amj-hero { padding: 20px 20px 16px; }
+  .amj-hero h1 { font-size: 34px; letter-spacing: -0.03em; }
+  .amj-hero-lede { font-size: 16px; }
+  .amj-hero-acronym { font-size: 15px; margin-bottom: 22px; }
+}

@@ -274,9 +274,24 @@ def build():
         parser.feed(html)
         used = set()
 
+
+        hero_m = re.search(r'<section class="amj-hero"[^>]*>(.*?)</section>', html, re.S)
+        if hero_m:
+            records.append(
+                {
+                    "page": page["page"],
+                    "url": page["url"],
+                    "anchor": "",
+                    "title": strip_html(re.search(r"<h1>(.*?)</h1>", hero_m.group(1), re.S).group(1)) if re.search(r"<h1>", hero_m.group(1)) else page["page"],
+                    "text": strip_html(hero_m.group(1)),
+                    "kind": "heading",
+                    "aliases": "AMAMLJ trust layer protocol",
+                }
+            )
+
         # page intro (article header h1 + lead paragraphs before first section)
         header_m = re.search(
-            r'<header class="docs-article-header">(.*?)</header>', html, re.S
+            r'<header class="docs-article-header[^"]*">(.*?)</header>', html, re.S
         )
         if header_m:
             header_text = strip_html(header_m.group(1))
