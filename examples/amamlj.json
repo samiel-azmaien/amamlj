@@ -1,45 +1,31 @@
 {
-  "amamlj_version": "0.3",
-  "status": "draft",
-  "issuer": "did:web:example.com",
-  "name": "Example Issuer",
-  "jwks_uri": "https://example.com/.well-known/amamlj-jwks.json",
+  "amamlj_version": "string (semver)",
+  "status": "string",
+  "issuer": "string (did:web)",
+  "name": "string",
+  "jwks_uri": "string (url)",
   "endpoints": {
-    "trust_profile": "https://example.com/v1/agents/{agent}/trust-profile",
-    "policy": "https://example.com/v1/agents/{agent}/policy",
-    "connection_request": "https://example.com/v1/connections",
-    "grant_status": "https://example.com/v1/grants/status/{list}",
-    "log_root": "https://example.com/v1/log/root"
+    "trust_profile": "string (url)",
+    "policy": "string (url)",
+    "connection_request": "string (url)",
+    "grant_status": "string (url)",
+    "log_root": "string (url)"
   },
   "signatures": {
-    "http": "rfc9421-ed25519",
-    "objects": "jws-eddsa-jcs"
+    "http": "string (rfc9421-ed25519)",
+    "objects": "string (jws-eddsa-jcs)"
   },
-  "did_methods": [
-    "did:web"
-  ],
-  "scope_registry": "https://example.com/v1/scopes",
-  "risk_classes": [
-    "R0",
-    "R1",
-    "R2",
-    "R3",
-    "R4"
-  ],
-  "tiers": [
-    "honored",
-    "standard",
-    "probation",
-    "restricted",
-    "suspended"
-  ],
+  "did_methods": ["string (did:web)"],
+  "scope_registry": "string (url)",
+  "risk_classes": ["string (R0 | R1 | R2 | R3 | R4)"],
+  "tiers": ["string (honored | standard | probation | restricted | suspended)"],
   "runtime_security": {
-    "inbound_scan": true,
-    "outbound_scan": true,
-    "decision_receipts": true
+    "inbound_scan": "boolean",
+    "outbound_scan": "boolean",
+    "decision_receipts": "boolean"
   },
   "extensions": {
-    "poppy": "https://example.com/.well-known/poppy.json"
+    "poppy": "string (url, optional)"
   },
-  "contact": "SECURITY_CONTACT_PLACEHOLDER"
+  "contact": "string (uri)"
 }

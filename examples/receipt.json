@@ -1,29 +1,35 @@
 {
-  "receipt_id": "00000000-0000-0000-0000-000000000000",
+  "receipt_id": "string (uuid)",
   "interaction": {
-    "task_id": "task_example",
-    "action": "data.purchase",
-    "resource": "urn:example:dataset:firmographics-q4"
+    "task_id": "string",
+    "action": "string",
+    "resource": "string"
   },
   "parties": {
-    "requester": "did:web:totemlayer.com:agents:buyer-example",
-    "provider": "did:web:totemlayer.com:agents:example-data"
+    "requester": "string (did:web)",
+    "provider": "string (did:web)"
   },
   "agreed": {
-    "scope": "firmographic records for named accounts, no resale",
-    "price": {"amount": 500, "currency": "USD"},
-    "deadline": "2026-11-20T17:00:00-08:00"
+    "scope": "string",
+    "price": {
+      "amount": "number",
+      "currency": "string (ISO 4217)"
+    },
+    "deadline": "string (ISO 8601)"
   },
   "delivered": {
-    "artifact_hash": "sha256:ARTIFACT_HASH_PLACEHOLDER",
-    "delivered_at": "2026-11-18T11:04:00-08:00"
+    "artifact_hash": "string (sha256:...)",
+    "delivered_at": "string (ISO 8601)"
   },
-  "outcome": "completed",
-  "rating": {"quality": 5, "on_time": true},
-  "owner_approved": true,
+  "outcome": "string (completed | disputed | cancelled)",
+  "rating": {
+    "quality": "integer (1–5)",
+    "on_time": "boolean"
+  },
+  "owner_approved": "boolean",
   "signatures": {
-    "requester": "jws:REQUESTER_SIGNATURE_PLACEHOLDER",
-    "provider": "jws:PROVIDER_SIGNATURE_PLACEHOLDER",
-    "totem": "jws:TOTEM_SIGNATURE_PLACEHOLDER"
+    "requester": "string (JWS EdDSA)",
+    "provider": "string (JWS EdDSA)",
+    "totem": "string (JWS EdDSA, optional)"
   }
 }

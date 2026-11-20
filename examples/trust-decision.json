@@ -1,60 +1,50 @@
 {
   "typ": "amj.trust_decision",
-  "v": 1,
-  "decision_id": "DECISION_ID_PLACEHOLDER",
-  "evaluated_at": "2026-11-15T20:00:00Z",
-  "expires_at": "2026-11-15T20:15:00Z",
-  "subject": "did:web:example.com:agents:buyer-example",
-  "for": "did:web:example.com:agents:vendor-example",
-  "tier": "standard",
-  "score": 612,
-  "confidence": 0.41,
+  "v": "integer",
+  "decision_id": "string (uuid)",
+  "evaluated_at": "string (ISO 8601)",
+  "expires_at": "string (ISO 8601)",
+  "subject": "string (did:web)",
+  "for": "string (did:web)",
+  "tier": "string (honored | standard | probation | restricted | suspended)",
+  "score": "integer",
+  "confidence": "number (0–1)",
   "verification": {
-    "tier": "V1",
-    "claims": [
-      "domain:example.com"
-    ]
+    "tier": "string (V0 | V1 | ...)",
+    "claims": ["string"]
   },
-  "risk_flag": "none",
+  "risk_flag": "string (none | watch | warning | suspended)",
   "past": {
-    "receipts": 12,
-    "completion_rate": 1.0,
-    "dispute_rate": 0.0,
-    "security_incidents_90d": 0
+    "receipts": "integer",
+    "completion_rate": "number (0–1)",
+    "dispute_rate": "number (0–1)",
+    "security_incidents_90d": "integer"
   },
   "philosophy": {
-    "policy_version": 3,
-    "policy_fit": 0.92,
-    "conflicts": []
+    "policy_version": "integer",
+    "policy_fit": "number (0–1)",
+    "conflicts": ["string"]
   },
   "present": {
-    "fit": 0.88,
-    "least_privilege_ok": false,
-    "content_scan": "clean",
-    "anomalies": [
-      "amount_above_median"
-    ]
+    "fit": "number (0–1)",
+    "least_privilege_ok": "boolean",
+    "content_scan": "string",
+    "anomalies": ["string"]
   },
   "lineage": {
-    "probable_successor_of": null,
-    "links_possible": 0
+    "probable_successor_of": "string (did:web) | null",
+    "links_possible": "integer"
   },
-  "outcome": "allow_to_owner",
-  "max_grantable_risk_class": "R3",
+  "outcome": "string (allow | allow_to_owner | deny)",
+  "max_grantable_risk_class": "string (R0 | R1 | R2 | R3 | R4)",
   "suggested_grant": {
-    "scopes": [
-      "data.read.shared",
-      "action.request:data.purchase"
-    ],
+    "scopes": ["string"],
     "budget": {
-      "max_per_action": 250,
-      "currency": "USD"
+      "max_per_action": "number",
+      "currency": "string (ISO 4217)"
     },
-    "expires_in_days": 30
+    "expires_in_days": "integer"
   },
-  "reasons": [
-    "AMJ-TRU-004 amount above sender median",
-    "AMJ-TRU-011 verified domain"
-  ],
-  "signature": "jws:TRUST_DECISION_SIGNATURE_PLACEHOLDER"
+  "reasons": ["string (reason code)"],
+  "signature": "string (JWS EdDSA)"
 }

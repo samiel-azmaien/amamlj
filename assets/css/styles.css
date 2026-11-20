@@ -1,4 +1,4 @@
-/* AMAMLJ site — styled to match the totemlayer.com UI. Draft v0.3. */
+/* AMAMLJ site — styled to match the totemlayer.com UI. Version 0.3. */
 :root {
   /* Palette observed on totemlayer.com (computed styles + CSS tokens, Nov 2026) */
   --paper: #08090b;          /* page bg (body/header rgb(8,9,11)) */
@@ -470,7 +470,7 @@ tr:last-child td { border-bottom: 0; }
 .card h3 { margin: 0 0 8px; font-size: 1.15rem; }
 .card p { margin: 0; color: var(--ink-soft); }
 
-/* Partners placeholder */
+/* Partner grid (unused) */
 .placeholder-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1441,3 +1441,74 @@ body { font-size: 15px; }
 .docs-section .perm-col > .sub-h.tight:first-child { margin-top: 8px; }
 .docs-site main#main { margin: 0; border: 0; }
 .docs-site .docs-article-header h1 { font-family: inherit; }
+
+/* Docs keyword search dropdown */
+.docs-search { position: relative; }
+.docs-search-panel {
+  position: absolute;
+  z-index: 60;
+  top: calc(100% + 6px);
+  left: 0;
+  width: min(420px, 72vw);
+  max-height: min(440px, 70vh);
+  overflow: auto;
+  border: 1px solid #ffffff35;
+  border-radius: 12px;
+  background: var(--docs-surface);
+  color: var(--docs-fg);
+  box-shadow: 0 16px 40px #00000088;
+  scrollbar-width: thin;
+  scrollbar-color: #484c56 transparent;
+}
+.docs-search-panel .docs-search-results { padding: 8px; }
+.docs-search-panel .docs-search-hit {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--docs-fg);
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+}
+.docs-search-panel .docs-search-hit.is-selected,
+.docs-search-panel .docs-search-hit:hover {
+  background: #ffffff0a;
+}
+.docs-search-panel .docs-search-page {
+  color: var(--docs-muted);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.docs-search-panel .docs-search-hit strong {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--docs-fg);
+}
+.docs-search-panel .docs-search-snippet {
+  color: var(--docs-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.docs-search-panel mark {
+  background: #a9d3f533;
+  color: #fff;
+  padding: 0 1px;
+  border-radius: 2px;
+}
+.docs-search-panel .docs-search-empty-msg,
+.docs-search-panel .docs-search-results > p {
+  margin: 0;
+  padding: 16px;
+  color: var(--docs-muted);
+  font-size: 14px;
+}
+@media (max-width: 1000px) {
+  .docs-search-panel { width: min(420px, calc(100vw - 48px)); }
+}

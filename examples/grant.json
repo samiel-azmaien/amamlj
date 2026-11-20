@@ -1,64 +1,49 @@
 {
   "typ": "amj.grant",
-  "v": 1,
-  "grant_id": "GRANT_ID_PLACEHOLDER",
-  "connection_id": "CONNECTION_ID_PLACEHOLDER",
-  "issuer": "did:web:example.com:owners:OWNER_PLACEHOLDER",
-  "subject": "did:web:example.com:agents:buyer-example",
-  "audience": "did:web:example.com:agents:vendor-example",
+  "v": "integer",
+  "grant_id": "string (uuid)",
+  "connection_id": "string (uuid)",
+  "issuer": "string (did:web)",
+  "subject": "string (did:web)",
+  "audience": "string (did:web)",
   "scopes": [
     {
-      "scope": "msg.send",
+      "scope": "string",
+      "resource": "string (optional)",
       "constraints": {
-        "max_msgs_per_day": 500,
-        "max_msg_bytes": 16384
-      }
-    },
-    {
-      "scope": "data.read.shared",
-      "resource": "collection:firmographics-v3",
-      "constraints": {
-        "max_rows_per_request": 1000
-      }
-    },
-    {
-      "scope": "action.request:data.purchase",
-      "resource": "vendor:vendor-example",
-      "constraints": {
-        "approval": "ask_each",
+        "max_msgs_per_day": "integer (optional)",
+        "max_msg_bytes": "integer (optional)",
+        "max_rows_per_request": "integer (optional)",
+        "approval": "string (auto | ask_each)",
         "budget": {
-          "currency": "USD",
-          "max_per_action": 250,
-          "max_total": 500
+          "currency": "string (ISO 4217)",
+          "max_per_action": "number",
+          "max_total": "number"
         }
       }
     }
   ],
   "validity": {
-    "not_before": "2026-11-15T20:00:00Z",
-    "expires_at": "2026-12-15T20:00:00Z"
+    "not_before": "string (ISO 8601)",
+    "expires_at": "string (ISO 8601)"
   },
-  "approval_mode": "ask_me",
-  "per_scope_approval": {
-    "msg.send": "auto",
-    "data.read.shared": "auto",
-    "action.request:data.purchase": "ask_each"
-  },
+  "approval_mode": "string (ask_me | auto | full_access)",
+  "per_scope_approval": "object (scope → auto | ask_each)",
   "trust_snapshot": {
-    "decision_id": "DECISION_ID_PLACEHOLDER",
-    "tier": "standard",
-    "score": 612,
-    "confidence": 0.41
+    "decision_id": "string",
+    "tier": "string (honored | standard | probation | restricted | suspended)",
+    "score": "integer",
+    "confidence": "number (0–1)"
   },
   "delegation": {
-    "parent_grant_id": null,
-    "depth": 0,
-    "max_depth": 0
+    "parent_grant_id": "string | null",
+    "depth": "integer",
+    "max_depth": "integer"
   },
   "status_ref": {
-    "list": "grants-2026-11",
-    "index": 0
+    "list": "string",
+    "index": "integer"
   },
-  "nonce": "NONCE_PLACEHOLDER",
-  "signature": "jws:GRANT_SIGNATURE_PLACEHOLDER"
+  "nonce": "string",
+  "signature": "string (JWS EdDSA)"
 }
