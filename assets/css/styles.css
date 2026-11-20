@@ -1602,21 +1602,19 @@ body { font-size: 15px; }
 }
 .amj-hero-card {
   min-width: 0;
-  max-height: 380px;
-  border: 1px solid #ffffff22;
-  border-radius: 22px;
-  background: #111214;
-  box-shadow: 0 24px 60px #00000055;
+  max-height: none;
+  border: 0;
+  border-radius: 20px;
+  background: transparent;
+  box-shadow: none;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  aspect-ratio: 16 / 9;
 }
 .amj-diagram {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 380px;
+  max-height: none;
 }
 .docs-article-header-compact {
   padding-bottom: 18px;

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css?v=7">
+  <link rel="stylesheet" href="assets/css/styles.css?v=8">
   <style>
     /* Critical hero styles (inlined so a cached stylesheet cannot unstyle this block) */
 /* AMAMLJ overview hero — centered 2-col container above the docs grid */
@@ -104,21 +104,19 @@
 }
 .amj-hero-card {
   min-width: 0;
-  max-height: 380px;
-  border: 1px solid #ffffff22;
-  border-radius: 22px;
-  background: #111214;
-  box-shadow: 0 24px 60px #00000055;
+  max-height: none;
+  border: 0;
+  border-radius: 20px;
+  background: transparent;
+  box-shadow: none;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  aspect-ratio: 16 / 9;
 }
 .amj-diagram {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 380px;
+  max-height: none;
 }
 .docs-article-header-compact {
   padding-bottom: 18px;
@@ -186,71 +184,144 @@ Totem</a>
         </div>
       </div>
       <div class="amj-hero-card">
-        <svg class="amj-diagram" viewBox="0 0 720 440" role="img" aria-labelledby="amj-diagram-title amj-diagram-desc">
-          <title id="amj-diagram-title">How AMAMLJ connects two agents</title>
-          <desc id="amj-diagram-desc">Agent A connects to Agent B through a center node labeled Trust, Permissions, and Runtime screening.</desc>
+        <svg class="amj-diagram" viewBox="0 0 1600 900" role="img" aria-labelledby="amj-diagram-title amj-diagram-desc" xmlns="http://www.w3.org/2000/svg">
+          <title id="amj-diagram-title">AMAMLJ</title>
+          <desc id="amj-diagram-desc">The Totem mark at the center, with agents connecting in and services connecting out.</desc>
           <defs>
-            <linearGradient id="amj-card-glow" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#a9d3f5" stop-opacity="0.14"/>
-              <stop offset="60%" stop-color="#a9d3f5" stop-opacity="0"/>
+            <linearGradient id="amj-outer" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a6a8e"/>
+              <stop offset="40%" stop-color="#0c1822"/>
+              <stop offset="70%" stop-color="#152838"/>
+              <stop offset="100%" stop-color="#4a7390"/>
             </linearGradient>
-            <marker id="amj-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-              <path d="M0 0 L8 4 L0 8 Z" fill="#a9d3f5" fill-opacity="0.75"/>
-            </marker>
+            <radialGradient id="amj-blob-a" cx="6%" cy="0%" r="62%">
+              <stop offset="0%" stop-color="#5a8eae" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#5a8eae" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="amj-blob-b" cx="100%" cy="100%" r="60%">
+              <stop offset="0%" stop-color="#070b0f" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#070b0f" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="amj-blob-c" cx="92%" cy="6%" r="44%">
+              <stop offset="0%" stop-color="#a9d3f5" stop-opacity="0.38"/>
+              <stop offset="100%" stop-color="#a9d3f5" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="amj-blob-d" cx="10%" cy="96%" r="42%">
+              <stop offset="0%" stop-color="#1a3348" stop-opacity="0.95"/>
+              <stop offset="100%" stop-color="#1a3348" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="amj-card-fill" cx="70%" cy="45%" r="80%">
+              <stop offset="0%" stop-color="#12181f"/>
+              <stop offset="100%" stop-color="#0a0d11"/>
+            </radialGradient>
+            <radialGradient id="amj-logo-aura" cx="50%" cy="48%" r="50%">
+              <stop offset="0%" stop-color="#a9d3f5" stop-opacity="0.32"/>
+              <stop offset="50%" stop-color="#a9d3f5" stop-opacity="0.1"/>
+              <stop offset="100%" stop-color="#a9d3f5" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="amj-logo-fill" x1="0.3" y1="0" x2="0.75" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="50%" stop-color="#e7f1fa"/>
+              <stop offset="100%" stop-color="#a9d3f5"/>
+            </linearGradient>
+            <filter id="amj-soft-glow" x="-45%" y="-45%" width="190%" height="190%">
+              <feGaussianBlur stdDeviation="16"/>
+            </filter>
+            <filter id="amj-card-shadow" x="-5%" y="-5%" width="110%" height="120%">
+              <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000" flood-opacity="0.45"/>
+            </filter>
           </defs>
-          <rect x="0.5" y="0.5" width="719" height="439" rx="20" fill="#111214"/>
-          <rect x="0.5" y="0.5" width="719" height="439" rx="20" fill="url(#amj-card-glow)"/>
-          <line x1="214" y1="48" x2="214" y2="392" stroke="#ffffff" stroke-opacity="0.1"/>
-          <g font-family="Manrope, ui-sans-serif, sans-serif">
-            <text x="40" y="150" fill="#eef3fb" font-size="32" font-weight="700" letter-spacing="-1">AMAMLJ</text>
-            <g transform="translate(40,184)">
-              <rect width="22" height="22" rx="6" fill="#191b1e" stroke="#a9d3f5" stroke-opacity="0.45"/>
-              <text x="11" y="16" text-anchor="middle" fill="#a9d3f5" font-size="12" font-weight="700">A</text>
-              <text x="32" y="16" fill="#bec0c7" font-size="12">Agent</text>
-            </g>
-            <g transform="translate(40,216)">
-              <rect width="22" height="22" rx="6" fill="#191b1e" stroke="#a9d3f5" stroke-opacity="0.45"/>
-              <text x="11" y="16" text-anchor="middle" fill="#a9d3f5" font-size="12" font-weight="700">M</text>
-              <text x="32" y="16" fill="#bec0c7" font-size="12">Memory</text>
-            </g>
-            <g transform="translate(40,248)">
-              <rect width="22" height="22" rx="6" fill="#191b1e" stroke="#a9d3f5" stroke-opacity="0.45"/>
-              <text x="11" y="16" text-anchor="middle" fill="#a9d3f5" font-size="12" font-weight="700">A</text>
-              <text x="32" y="16" fill="#bec0c7" font-size="12">Audit</text>
-            </g>
-            <g transform="translate(40,280)">
-              <rect width="22" height="22" rx="6" fill="#191b1e" stroke="#a9d3f5" stroke-opacity="0.45"/>
-              <text x="11" y="16" text-anchor="middle" fill="#a9d3f5" font-size="12" font-weight="700">M</text>
-              <text x="32" y="16" fill="#bec0c7" font-size="12">Meaning</text>
-            </g>
-            <g transform="translate(40,312)">
-              <rect width="22" height="22" rx="6" fill="#191b1e" stroke="#a9d3f5" stroke-opacity="0.45"/>
-              <text x="11" y="16" text-anchor="middle" fill="#a9d3f5" font-size="12" font-weight="700">L</text>
-              <text x="32" y="16" fill="#bec0c7" font-size="12">Lineage</text>
-            </g>
-            <g transform="translate(40,344)">
-              <rect width="22" height="22" rx="6" fill="#191b1e" stroke="#a9d3f5" stroke-opacity="0.45"/>
-              <text x="11" y="16" text-anchor="middle" fill="#a9d3f5" font-size="12" font-weight="700">J</text>
-              <text x="32" y="16" fill="#bec0c7" font-size="12">Judgment</text>
-            </g>
+
+          <rect width="1600" height="900" fill="url(#amj-outer)"/>
+          <rect width="1600" height="900" fill="url(#amj-blob-a)"/>
+          <rect width="1600" height="900" fill="url(#amj-blob-b)"/>
+          <rect width="1600" height="900" fill="url(#amj-blob-c)"/>
+          <rect width="1600" height="900" fill="url(#amj-blob-d)"/>
+
+          <rect x="48" y="48" width="1504" height="804" rx="52" fill="url(#amj-card-fill)" filter="url(#amj-card-shadow)"/>
+
+          <text x="120" y="458" fill="#f4f7fb" font-family="Manrope, ui-sans-serif, system-ui, sans-serif" font-size="148" font-weight="750" letter-spacing="-7.5">AMAMLJ</text>
+          <text x="126" y="514" fill="#8d959f" font-family="Manrope, ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="500" letter-spacing="1.6">by Totem</text>
+
+          <g>
+            <path d="M854.0,258.0 C953.0,271.0 1032.2,323.6 1052.0,320.8" fill="none" stroke="#a9d3f5" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.92"/>
+            <path d="M834.0,354.0 C920.9,371.9 990.4,383.7 1007.8,378.1" fill="none" stroke="#a9d3f5" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.92"/>
+            <path d="M822.0,450.0 C907.0,474.0 975.0,458.4 992.0,450.0" fill="none" stroke="#a9d3f5" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.92"/>
+            <path d="M834.0,546.0 C920.9,560.1 990.4,527.5 1007.8,521.9" fill="none" stroke="#a9d3f5" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.92"/>
+            <path d="M854.0,642.0 C953.0,645.0 1032.2,582.0 1052.0,579.2" fill="none" stroke="#a9d3f5" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.92"/>
           </g>
-          <g font-family="Manrope, ui-sans-serif, sans-serif">
-            <circle cx="286" cy="210" r="30" fill="#191b1e" stroke="#a9d3f5" stroke-opacity="0.55" stroke-width="1.5"/>
-            <text x="286" y="215" text-anchor="middle" fill="#eef3fb" font-size="14" font-weight="650">A</text>
-            <text x="286" y="262" text-anchor="middle" fill="#a0a4ae" font-size="12" font-weight="600">Agent A</text>
-            <rect x="376" y="126" width="196" height="168" rx="18" fill="#16181c" stroke="#a9d3f5" stroke-opacity="0.42" stroke-width="1.5"/>
-            <text x="474" y="168" text-anchor="middle" fill="#a9d3f5" font-size="11" font-weight="700" letter-spacing="1.8">AMAMLJ</text>
-            <text x="474" y="202" text-anchor="middle" fill="#eef3fb" font-size="16" font-weight="650">Trust</text>
-            <text x="474" y="228" text-anchor="middle" fill="#eef3fb" font-size="16" font-weight="650">Permissions</text>
-            <text x="474" y="254" text-anchor="middle" fill="#eef3fb" font-size="16" font-weight="650">Runtime screening</text>
-            <circle cx="644" cy="210" r="30" fill="#191b1e" stroke="#a9d3f5" stroke-opacity="0.55" stroke-width="1.5"/>
-            <text x="644" y="215" text-anchor="middle" fill="#eef3fb" font-size="14" font-weight="650">B</text>
-            <text x="644" y="262" text-anchor="middle" fill="#a0a4ae" font-size="12" font-weight="600">Agent B</text>
-            <path d="M318 210 H368" fill="none" stroke="#a9d3f5" stroke-opacity="0.7" stroke-width="1.7" marker-end="url(#amj-arrow)"/>
-            <path d="M578 210 H612" fill="none" stroke="#a9d3f5" stroke-opacity="0.7" stroke-width="1.7" marker-end="url(#amj-arrow)"/>
+          <g>
+            <path d="M1408.0,258.0 C1326.0,271.0 1260.4,323.6 1244.0,320.8" fill="none" stroke="#7f9cb3" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.88"/>
+            <path d="M1428.0,354.0 C1358.1,371.9 1302.2,383.7 1288.2,378.1" fill="none" stroke="#7f9cb3" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.88"/>
+            <path d="M1440.0,450.0 C1372.0,474.0 1317.6,458.4 1304.0,450.0" fill="none" stroke="#7f9cb3" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.88"/>
+            <path d="M1428.0,546.0 C1358.1,560.1 1302.2,527.5 1288.2,521.9" fill="none" stroke="#7f9cb3" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.88"/>
+            <path d="M1408.0,642.0 C1326.0,645.0 1260.4,582.0 1244.0,579.2" fill="none" stroke="#7f9cb3" stroke-width="2.4" stroke-linecap="round" stroke-opacity="0.88"/>
           </g>
+
+          <ellipse cx="1148" cy="450" rx="250" ry="270" fill="url(#amj-logo-aura)"/>
+          <g transform="translate(1148,450) scale(0.58) translate(-252,-292)">
+            <path d="M348.85 358.41C359.74 380.14 374.44 399.87 397.45 413.01C434.42 434.12 492.86 438.19 500.76 467.23C501.26 469.06 501.55 471 501.05 472.46C499.49 476.98 490.19 476.8 481.52 476.09C460.03 474.35 442.37 469.39 423.66 466.96C406.78 464.77 389.05 464.62 371.74 466.84C330.28 472.16 291.26 491.04 262.99 521.61C255.51 529.7 248.79 538.6 243.13 548.33C235.99 560.62 230.55 574.24 218.09 580.05C211.01 583.35 201.66 584.13 194.71 580.98C186.84 577.42 182.05 568.82 179.8 560.08C175.92 545.03 179.59 529.57 178.82 514.17C178.4 505.8 176.68 497.45 174.6 489.29C171.81 478.33 168.39 467.71 163.86 457.55C144.15 413.33 103.44 377.89 59.2 360.78C49.37 356.98 39.37 354.08 28.55 348.71C18.08 343.5 6.84 335.97 2.62 331.04C-11.91 314.02 56.91 327.76 98.28 332.7C111.31 334.25 121.61 334.94 132.59 333.38C140.94 332.2 149.69 329.72 158.05 327.06C163.07 325.46 167.94 323.79 172.7 321.84C184.64 316.95 195.81 310.26 206.14 302.48C229.04 285.25 247.83 262.64 261.85 237.37C284.67 196.26 294.87 148.08 311.82 105.9C318.58 89.1 326.41 73.25 331.14 52.72C335.59 33.43 337.32 10.01 351.9 3.76C357.12 1.52 363.98 1.48 368.64 3.36C383.67 9.43 375.76 35.44 369.77 58.13C361.36 89.97 356.74 115.27 350.57 142.06C339.67 189.39 323.96 241.35 328.97 291.03C331.34 314.45 338.31 337.37 348.85 358.41Z" fill="#a9d3f5" filter="url(#amj-soft-glow)" opacity="0.85"/>
+            <path d="M348.85 358.41C359.74 380.14 374.44 399.87 397.45 413.01C434.42 434.12 492.86 438.19 500.76 467.23C501.26 469.06 501.55 471 501.05 472.46C499.49 476.98 490.19 476.8 481.52 476.09C460.03 474.35 442.37 469.39 423.66 466.96C406.78 464.77 389.05 464.62 371.74 466.84C330.28 472.16 291.26 491.04 262.99 521.61C255.51 529.7 248.79 538.6 243.13 548.33C235.99 560.62 230.55 574.24 218.09 580.05C211.01 583.35 201.66 584.13 194.71 580.98C186.84 577.42 182.05 568.82 179.8 560.08C175.92 545.03 179.59 529.57 178.82 514.17C178.4 505.8 176.68 497.45 174.6 489.29C171.81 478.33 168.39 467.71 163.86 457.55C144.15 413.33 103.44 377.89 59.2 360.78C49.37 356.98 39.37 354.08 28.55 348.71C18.08 343.5 6.84 335.97 2.62 331.04C-11.91 314.02 56.91 327.76 98.28 332.7C111.31 334.25 121.61 334.94 132.59 333.38C140.94 332.2 149.69 329.72 158.05 327.06C163.07 325.46 167.94 323.79 172.7 321.84C184.64 316.95 195.81 310.26 206.14 302.48C229.04 285.25 247.83 262.64 261.85 237.37C284.67 196.26 294.87 148.08 311.82 105.9C318.58 89.1 326.41 73.25 331.14 52.72C335.59 33.43 337.32 10.01 351.9 3.76C357.12 1.52 363.98 1.48 368.64 3.36C383.67 9.43 375.76 35.44 369.77 58.13C361.36 89.97 356.74 115.27 350.57 142.06C339.67 189.39 323.96 241.35 328.97 291.03C331.34 314.45 338.31 337.37 348.85 358.41Z" fill="url(#amj-logo-fill)"/>
+          </g>
+
+            <g>
+              <circle cx="818" cy="258" r="36" fill="#173044" stroke="#a9d3f5" stroke-width="1.7"/>
+              <g transform="translate(804.20,244.20) scale(1.15)"><path d="M12 2.8 13.35 10.1 20.8 12 13.35 13.9 12 21.2 10.65 13.9 3.2 12 10.65 10.1Z" fill="#a9d3f5"/>
+        <path d="M18.8 5.1 19.35 7.05 21.3 7.6 19.35 8.15 18.8 10.1 18.25 8.15 16.3 7.6 18.25 7.05Z" fill="#a9d3f5"/></g>
+            </g>
+            <g>
+              <circle cx="798" cy="354" r="36" fill="#173044" stroke="#a9d3f5" stroke-width="1.7"/>
+              <g transform="translate(784.20,340.20) scale(1.15)"><path d="M12 2.8 13.35 10.1 20.8 12 13.35 13.9 12 21.2 10.65 13.9 3.2 12 10.65 10.1Z" fill="#a9d3f5"/>
+        <path d="M18.8 5.1 19.35 7.05 21.3 7.6 19.35 8.15 18.8 10.1 18.25 8.15 16.3 7.6 18.25 7.05Z" fill="#a9d3f5"/></g>
+            </g>
+            <g>
+              <circle cx="786" cy="450" r="36" fill="#173044" stroke="#a9d3f5" stroke-width="1.7"/>
+              <g transform="translate(772.20,436.20) scale(1.15)"><path d="M12 2.8 13.35 10.1 20.8 12 13.35 13.9 12 21.2 10.65 13.9 3.2 12 10.65 10.1Z" fill="#a9d3f5"/>
+        <path d="M18.8 5.1 19.35 7.05 21.3 7.6 19.35 8.15 18.8 10.1 18.25 8.15 16.3 7.6 18.25 7.05Z" fill="#a9d3f5"/></g>
+            </g>
+            <g>
+              <circle cx="798" cy="546" r="36" fill="#173044" stroke="#a9d3f5" stroke-width="1.7"/>
+              <g transform="translate(784.20,532.20) scale(1.15)"><path d="M12 2.8 13.35 10.1 20.8 12 13.35 13.9 12 21.2 10.65 13.9 3.2 12 10.65 10.1Z" fill="#a9d3f5"/>
+        <path d="M18.8 5.1 19.35 7.05 21.3 7.6 19.35 8.15 18.8 10.1 18.25 8.15 16.3 7.6 18.25 7.05Z" fill="#a9d3f5"/></g>
+            </g>
+            <g>
+              <circle cx="818" cy="642" r="36" fill="#173044" stroke="#a9d3f5" stroke-width="1.7"/>
+              <g transform="translate(804.20,628.20) scale(1.15)"><path d="M12 2.8 13.35 10.1 20.8 12 13.35 13.9 12 21.2 10.65 13.9 3.2 12 10.65 10.1Z" fill="#a9d3f5"/>
+        <path d="M18.8 5.1 19.35 7.05 21.3 7.6 19.35 8.15 18.8 10.1 18.25 8.15 16.3 7.6 18.25 7.05Z" fill="#a9d3f5"/></g>
+            </g>
+            <g>
+              <circle cx="1444" cy="258" r="36" fill="#1a222c" stroke="#8aa8c0" stroke-width="1.7"/>
+              <g transform="translate(1429.36,243.36) scale(1.22)"><path d="M12 3.5 19.3 6.6v6c0 4.05-3.15 6.9-7.3 8.4-4.15-1.5-7.3-4.35-7.3-8.4v-6Z" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M8.9 12.15 11.15 14.4 15.4 9.6" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g>
+            </g>
+            <g>
+              <circle cx="1464" cy="354" r="36" fill="#1a222c" stroke="#8aa8c0" stroke-width="1.7"/>
+              <g transform="translate(1449.36,339.36) scale(1.22)"><path d="M4.5 10.3 12 4.8l7.5 5.5" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M6.3 10.3v7.3M10.1 10.3v7.3M13.9 10.3v7.3M17.7 10.3v7.3" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M4.7 17.6h14.6M3.7 20h16.6" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g>
+            </g>
+            <g>
+              <circle cx="1476" cy="450" r="36" fill="#1a222c" stroke="#8aa8c0" stroke-width="1.7"/>
+              <g transform="translate(1461.36,435.36) scale(1.22)"><path d="M4.3 6.3h2.4l1.5 9h10l1.85-6.1H8.3" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="10.2" cy="18.35" r="1.35" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="16.6" cy="18.35" r="1.35" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g>
+            </g>
+            <g>
+              <circle cx="1464" cy="546" r="36" fill="#1a222c" stroke="#8aa8c0" stroke-width="1.7"/>
+              <g transform="translate(1449.36,531.36) scale(1.22)"><path d="M7 4.5h6.3L18.8 10v9.5H7Z" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M13.3 4.5V10h5.5" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M9.4 13.5h5.6M9.4 16.5h5.6" stroke="#c5d6e6" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g>
+            </g>
+            <g>
+              <circle cx="1444" cy="642" r="36" fill="#1a222c" stroke="#8aa8c0" stroke-width="1.7"/>
+              <g transform="translate(1429.36,627.36) scale(1.22)"><path d="m11 17 2 2a1 1 0 1 0 3-3" stroke="#c5d6e6" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" stroke="#c5d6e6" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="m21 3 1 11h-2" stroke="#c5d6e6" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" stroke="#c5d6e6" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M3 4h8" stroke="#c5d6e6" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g>
+            </g>
         </svg>
-      </div>
+      </div>      </div>
     </div>
   </section>
   <div class="docs-layout">
@@ -885,6 +956,6 @@ Totem</a>
     <aside class="docs-right-rail"><nav class="docs-outline" aria-label="On this page"><p>On this page</p></nav></aside>
   </div>
 </div>
-<script src="assets/js/site.js?v=7"></script>
+<script src="assets/js/site.js?v=8"></script>
 </body>
 </html>

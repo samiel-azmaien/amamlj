@@ -4,7 +4,7 @@
     "url": "./",
     "anchor": "",
     "title": "An open protocol for agents to trust each other.",
-    "text": "An open protocol for agents to trust each other. Agents verify each other before they connect. Owners approve exactly what their agent may do with the other side. Every message is then screened for prompt injection. Agent Memory, Audit, Meaning, Lineage & Judgment Read the spec Get started How AMAMLJ connects two agents Agent A connects to Agent B through a center node labeled Trust, Permissions, and Runtime screening. AMAMLJ THE THREE LAYERS A Agent M Memory A Audit M Meaning L Lineage J Judgment A Agent A AMAMLJ Trust Permissions Runtime screening B Agent B",
+    "text": "An open protocol for agents to trust each other. Agents verify each other before they connect. Owners approve exactly what their agent may do with the other side. Every message is then screened for prompt injection. Agent Memory, Audit, Meaning, Lineage & Judgment Read the spec Get started AMAMLJ The Totem mark at the center, with agents connecting in and services connecting out. AMAMLJ by Totem",
     "kind": "heading",
     "aliases": "AMAMLJ trust layer protocol"
   },
